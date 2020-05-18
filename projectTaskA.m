@@ -26,14 +26,14 @@ elength = length(e); % number of boundary edges
 Q = 5 * 10^(7); %Heat generation [W/m^3]
 Tinf = 18; %Temperature outside the component [C]
 ac = 40; %Convection constant [W/(m^2 K)]
-ep = 0.01;
+ep = 0.01; %pertrution out of the plane [m]
 
 %Thermal conductivities for Ag-epoxy, silicon and copper [W/(m K)]
 kAg = 5;
 kSi = 149;
 kCu = 385;
 
-%reduce video quality if enabled%
+%reduce video quality if enabled
 if strcmp('yes',QUARANTINE)
     Q = 0.75*Q;
 end
@@ -117,10 +117,11 @@ for elnbr = 1:nelm
     end
     
     %As our Ex and Ey matrices give the coordinates in mm, we have to
-    %divide these by 1000 to have SI units
+    %divide these by 1000 to have SI units. We calculate the element K
+    %matrix Ke and the element force vector fe here.
     [Ke, fe] = flw2te(Ex(elnbr,:)./1000,Ey(elnbr,:)./1000, ep, k*eye(2), Ql);
     
-    %instead of using assem, we can use these three lines with the same
+    %Instead of using assem, we can use these three lines with the same
     %behaviour and much better performance
     index = edof(elnbr,2:end);
     K(index,index) = K(index,index)+Ke;
