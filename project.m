@@ -412,7 +412,7 @@ clc
 %load('projectmesh.mat');
 
 load afine
-load('projectmeshfine.mat');
+load('projectmesh.mat');
 
 %-Preprocessor-%
 
@@ -524,7 +524,7 @@ for elnbr = 1:nelm
     tempInElement = mean(temperatures - T0);
     
     epsilon0 = (1 + v)*alpha*tempInElement*[1 1 0]';
-    es = Dstress*epsilon0;
+    es = -Dstress*epsilon0;
     
     fe = plantf(Ex(elnbr,:)./1000,Ey(elnbr,:)./1000,ep,es');
     

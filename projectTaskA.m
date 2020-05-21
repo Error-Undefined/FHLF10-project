@@ -9,7 +9,7 @@ clc
 %change to alter program behaviour
 QUARANTINE = 'no'; %Set to 'yes' to reduce video quality by 25%
 PLOT_ELEMENTS = 'no'; %Set to 'no' to remove the element outlines in the plot
-load('projectmeshfinest.mat'); % the mesh to load (consisting of variables p, e, t)
+load('projectmeshfine.mat'); % the mesh to load (consisting of variables p, e, t)
 
 %------preprocessor------%
 
@@ -164,6 +164,6 @@ title('Stationary temperature distribution in the component')
 ylabel('Height [m]')
 xlabel('Width [m]')
 
-%--Save of variables--%
-save('temperatureDistribution.mat','a'); %Save the stationary temperature 
-                                         %distribution to use in task c)
+% Save the stationary temperature distribution (a), as well as the mesh 
+% (p, e, t) to use in task C.
+save('temperatureDistribution.mat','a', 'p', 'e', 't'); 
